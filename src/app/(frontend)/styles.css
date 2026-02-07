@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+/* Font Family Utilities */
+@layer utilities {
+  .font-satoshi {
+    font-family: var(--font-satoshi);
+  }
+
+  .font-aston-script {
+    font-family: var(--font-aston-script);
+  }
+}
 
 @layer reset {
   body {
