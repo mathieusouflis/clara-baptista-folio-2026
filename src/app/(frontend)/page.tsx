@@ -1,8 +1,8 @@
 import './styles.css'
-import { HomePage } from '@/features/home'
+import { HomePageWrapper } from '@/features/home'
 
 export default async function Page() {
   return <>
-    <HomePage/>
+    <HomePageWrapper/>
   </>
 }
