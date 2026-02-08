@@ -97,6 +97,11 @@ export const Categories: CollectionConfig = {
 
   fields: [
     {
+      name: 'priority',
+      type: 'number',
+      defaultValue: 0,
+    },
+    {
       name: 'categoryName',
       type: 'text',
       required: true,
@@ -106,6 +111,19 @@ export const Categories: CollectionConfig = {
       type: "relationship",
       relationTo: "projects",
       hasMany: true,
+    },
+    {
+      name: "showcasedProjects",
+      type: "relationship",
+      relationTo: "projects",
+      hasMany: true,
+      filterOptions: ({ data }) => {
+        return {
+          id: {
+            in: data?.relatedProjects || []
+          }
+        }
+      },
     },
     {
       name: "projectCount",

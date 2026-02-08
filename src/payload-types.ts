@@ -182,8 +182,10 @@ export interface Project {
  */
 export interface Category {
   id: number;
+  priority?: number | null;
   categoryName: string;
   relatedProjects?: (number | Project)[] | null;
+  showcasedProjects?: (number | Project)[] | null;
   projectCount?: number | null;
   updatedAt: string;
   createdAt: string;
@@ -328,8 +330,10 @@ export interface ProjectsSelect<T extends boolean = true> {
  * via the `definition` "categories_select".
  */
 export interface CategoriesSelect<T extends boolean = true> {
+  priority?: T;
   categoryName?: T;
   relatedProjects?: T;
+  showcasedProjects?: T;
   projectCount?: T;
   updatedAt?: T;
   createdAt?: T;
