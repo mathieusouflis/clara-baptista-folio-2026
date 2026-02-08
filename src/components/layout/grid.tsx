@@ -20,6 +20,11 @@ type GridOwnProps<T extends React.ElementType = 'div'> = {
   columns?: number
 
   /**
+   * Custom row gap (tailwindcss controlled gap)
+   */
+  rowGap?: string
+
+  /**
    * HTML element to render as
    * @default 'div'
    */
@@ -51,6 +56,7 @@ export function Grid<T extends React.ElementType = 'div'>({
   className,
   withMargins = true,
   withGap = true,
+  rowGap,
   columns,
   as,
   debug = false,
@@ -61,14 +67,15 @@ export function Grid<T extends React.ElementType = 'div'>({
   const gridStyle = {
     ...style,
     ...(columns && ({ '--grid-columns': columns } as React.CSSProperties)),
+    ...(rowGap && { rowGap }),
   }
 
   return (
     <Component
       className={cn(
         'grid-container',
-        !withMargins && '!px-0',
-        !withGap && '!gap-0',
+        !withMargins && 'px-0!',
+        !withGap && 'gap-0!',
         debug && 'grid-debug',
         className,
       )}

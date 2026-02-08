@@ -20,11 +20,11 @@ export function ImageSwitcher({images, hidden}: {images: string[], hidden?: bool
   if(!images.length) return null;
 
   return (
-    <div className="flex flex-col items-center fixed m-(--grid-margin-mobile) right-0 top-0 z-0" style={{
+    <div className="flex flex-col items-center fixed my-[calc(var(--grid-margin-mobile)*2)] mx-(--grid-margin-mobile) right-0 top-0 z-0" style={{
       opacity: hidden ? 0 : 1,
       transition: 'opacity 0.2s',
     }}>
-      <Image src={images[currentImageIndex]} alt="Category Image" width={1940} height={1080} className="aspect-18/24 w-auto h-[calc(100vh-2*var(--grid-margin-mobile))]" />
+      <Image src={images[currentImageIndex]} alt={"Category Image (not an alt)"} width={1940} height={1080} className="aspect-18/24 w-auto h-[calc(100vh-2*var(--grid-margin-mobile)*2)]" />
     </div>
   );
 }
