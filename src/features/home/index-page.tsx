@@ -37,7 +37,7 @@ export function HomePage({ projectsList }: { projectsList: Project[] }) {
     <Grid className="h-screen pointer-events-none">
       {projectsGroups.map((group, idx) =>
           <GridItem key={idx} span={2} className="relative">
-            <InfiniteScrollColumn projects={group} gap={600} direction="down" speed={speeds[idx]} pauseOnHover={false}/>
+            <InfiniteScrollColumn projects={group} gap={1200} direction="down" speed={speeds[idx]} pauseOnHover={false}/>
             <span className="absolute top-0 -right-[calc(var(--grid-gap)/2)] bg-black w-0.5 h-full translate-x-1/2 opacity-15"/>
           </GridItem>
       )}
