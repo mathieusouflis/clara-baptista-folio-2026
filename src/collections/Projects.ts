@@ -10,6 +10,7 @@ export const Projects: CollectionConfig = {
   access: {
     read: () => true,
   },
+
   fields: [
     {
       name: 'name',
@@ -34,6 +35,9 @@ export const Projects: CollectionConfig = {
       type: 'relationship',
       relationTo: 'categories',
       hasMany: true,
+      admin: {
+        readOnly: true
+      }
     },
   ],
 }

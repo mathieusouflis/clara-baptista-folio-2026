@@ -184,6 +184,7 @@ export interface Category {
   id: number;
   categoryName: string;
   relatedProjects?: (number | Project)[] | null;
+  projectCount?: number | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -329,6 +330,7 @@ export interface ProjectsSelect<T extends boolean = true> {
 export interface CategoriesSelect<T extends boolean = true> {
   categoryName?: T;
   relatedProjects?: T;
+  projectCount?: T;
   updatedAt?: T;
   createdAt?: T;
 }

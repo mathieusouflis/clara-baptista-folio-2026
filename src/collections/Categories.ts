@@ -9,6 +9,92 @@ export const Categories: CollectionConfig = {
   access: {
     read: () => true,
   },
+  hooks: {
+    beforeChange: [
+      ({ data }) => {
+        if (data.relatedProjects) {
+          data.projectCount = Array.isArray(data.relatedProjects)
+            ? data.relatedProjects.length
+            : 0
+        }
+        return data
+      },
+    ],
+    afterChange: [
+      async ({ doc, req, operation, previousDoc, context }) => {
+        const categoryId = doc.id
+        const newProjectIds = (doc.relatedProjects || []).map((p: any) =>
+          typeof p === 'object' ? p.id : p
+        )
+        const oldProjectIds = operation === 'update' && previousDoc
+          ? (previousDoc.relatedProjects || []).map((p: any) =>
+              typeof p === 'object' ? p.id : p
+            )
+          : []
+
+        const projectsToRemove = oldProjectIds.filter((id: string) => !newProjectIds.includes(id))
+
+        const projectsToAdd = newProjectIds.filter((id: string) => !oldProjectIds.includes(id))
+
+        for (const projectId of projectsToRemove) {
+          try {
+            const project = await req.payload.findByID({
+              collection: 'projects',
+              id: projectId,
+              req,
+            })
+
+            if (project) {
+              const updatedCategories = (project.relatedCategories || [])
+                .map((c: any) => typeof c === 'object' ? c.id : c)
+                .filter((id: string) => id !== categoryId)
+
+              await req.payload.update({
+                collection: 'projects',
+                id: projectId,
+                data: {
+                  relatedCategories: updatedCategories,
+                },
+                req,
+              })
+            }
+          } catch (error) {
+            console.error(`Error removing category from project ${projectId}:`, error)
+          }
+        }
+
+        for (const projectId of projectsToAdd) {
+          try {
+            const project = await req.payload.findByID({
+              collection: 'projects',
+              id: projectId,
+              req,
+            })
+
+            if (project) {
+              const categoryIds = (project.relatedCategories || [])
+                .map((c: any) => typeof c === 'object' ? c.id : c)
+
+              if (!categoryIds.includes(categoryId)) {
+                await req.payload.update({
+                  collection: 'projects',
+                  id: projectId,
+                  data: {
+                    relatedCategories: [...categoryIds, categoryId],
+                  },
+                  context: { skipBidirectionalSync: true },
+                  req,
+                })
+              }
+            }
+          } catch (error) {
+            console.error(`Error adding category to project ${projectId}:`, error)
+          }
+        }
+      },
+    ],
+  },
+
   fields: [
     {
       name: 'categoryName',
@@ -20,6 +106,14 @@ export const Categories: CollectionConfig = {
       type: "relationship",
       relationTo: "projects",
       hasMany: true,
-    }
+    },
+    {
+      name: "projectCount",
+      type: "number",
+      defaultValue: 0,
+      admin: {
+        readOnly: true,
+      },
+    },
   ],
 }
