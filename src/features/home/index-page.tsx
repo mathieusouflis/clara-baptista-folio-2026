@@ -47,7 +47,7 @@ export function HomePage({ projectsList }: { projectsList: Project[] }) {
               speed={speeds[idx]}
               pauseOnHover={false}
             />
-            {idx > projectsGroups.length && (
+            {projectsGroups.length > idx + 1 && (
               <span className="absolute top-0 -right-[calc(var(--grid-gap)/2)] bg-black w-0.5 h-full translate-x-1/2 opacity-15" />
             )}
           </GridItem>
