@@ -1,6 +1,6 @@
 import { NavPathLink } from "./nav-path-link";
 
-export async function NavLayout({ children }: { children: React.ReactNode }) {
+export function NavLayout({ children }: { children: React.ReactNode }) {
   const pages = [
     { label: "Home", href: "/" },
     { label: "Projects", href: "/categories" },
