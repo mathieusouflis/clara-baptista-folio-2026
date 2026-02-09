@@ -4,7 +4,7 @@ export const Projects: CollectionConfig = {
   slug: 'projects',
   admin: {
     useAsTitle: 'name',
-    group: "Projects",
+    group: 'Projects',
     groupBy: true,
   },
   access: {
@@ -23,7 +23,7 @@ export const Projects: CollectionConfig = {
 
           if (project && project.relatedCategories) {
             const categoryIds = (project.relatedCategories || []).map((c: any) =>
-              typeof c === 'object' ? c.id : c
+              typeof c === 'object' ? c.id : c,
             )
 
             for (const categoryId of categoryIds) {
@@ -39,7 +39,7 @@ export const Projects: CollectionConfig = {
                   const newCount = Math.max(0, currentCount - 1)
 
                   const updatedProjects = (category.relatedProjects || [])
-                    .map((p: any) => typeof p === 'object' ? p.id : p)
+                    .map((p: any) => (typeof p === 'object' ? p.id : p))
                     .filter((projectId: string) => projectId !== id)
 
                   await req.payload.update({
@@ -75,7 +75,7 @@ export const Projects: CollectionConfig = {
       type: 'textarea',
     },
     {
-      name: "releaseDate",
+      name: 'releaseDate',
       type: 'date',
     },
     {
@@ -89,8 +89,8 @@ export const Projects: CollectionConfig = {
       relationTo: 'categories',
       hasMany: true,
       admin: {
-        readOnly: true
-      }
+        readOnly: true,
+      },
     },
   ],
 }

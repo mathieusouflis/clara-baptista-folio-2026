@@ -1,5 +1,5 @@
-import { CategoriesPage } from "@/features/categories";
+import { CategoriesPage } from '@/features/categories'
 
-export default function Page(){
-  return <CategoriesPage/>
+export default function Page() {
+  return <CategoriesPage />
 }

@@ -4,7 +4,7 @@ export const Categories: CollectionConfig = {
   slug: 'categories',
   admin: {
     useAsTitle: 'categoryName',
-    group: "Projects"
+    group: 'Projects',
   },
   access: {
     read: () => true,
@@ -13,9 +13,7 @@ export const Categories: CollectionConfig = {
     beforeChange: [
       ({ data }) => {
         if (data.relatedProjects) {
-          data.projectCount = Array.isArray(data.relatedProjects)
-            ? data.relatedProjects.length
-            : 0
+          data.projectCount = Array.isArray(data.relatedProjects) ? data.relatedProjects.length : 0
         }
         return data
       },
@@ -24,13 +22,14 @@ export const Categories: CollectionConfig = {
       async ({ doc, req, operation, previousDoc, context }) => {
         const categoryId = doc.id
         const newProjectIds = (doc.relatedProjects || []).map((p: any) =>
-          typeof p === 'object' ? p.id : p
+          typeof p === 'object' ? p.id : p,
         )
-        const oldProjectIds = operation === 'update' && previousDoc
-          ? (previousDoc.relatedProjects || []).map((p: any) =>
-              typeof p === 'object' ? p.id : p
-            )
-          : []
+        const oldProjectIds =
+          operation === 'update' && previousDoc
+            ? (previousDoc.relatedProjects || []).map((p: any) =>
+                typeof p === 'object' ? p.id : p,
+              )
+            : []
 
         const projectsToRemove = oldProjectIds.filter((id: string) => !newProjectIds.includes(id))
 
@@ -46,7 +45,7 @@ export const Categories: CollectionConfig = {
 
             if (project) {
               const updatedCategories = (project.relatedCategories || [])
-                .map((c: any) => typeof c === 'object' ? c.id : c)
+                .map((c: any) => (typeof c === 'object' ? c.id : c))
                 .filter((id: string) => id !== categoryId)
 
               await req.payload.update({
@@ -72,8 +71,9 @@ export const Categories: CollectionConfig = {
             })
 
             if (project) {
-              const categoryIds = (project.relatedCategories || [])
-                .map((c: any) => typeof c === 'object' ? c.id : c)
+              const categoryIds = (project.relatedCategories || []).map((c: any) =>
+                typeof c === 'object' ? c.id : c,
+              )
 
               if (!categoryIds.includes(categoryId)) {
                 await req.payload.update({
@@ -102,7 +102,7 @@ export const Categories: CollectionConfig = {
                 req,
               })
               return project ? { ...project, id: projectId } : null
-            })
+            }),
           )
 
           const sortedProjects = projectsWithDetails
@@ -132,27 +132,27 @@ export const Categories: CollectionConfig = {
       required: true,
     },
     {
-      name: "relatedProjects",
-      type: "relationship",
-      relationTo: "projects",
+      name: 'relatedProjects',
+      type: 'relationship',
+      relationTo: 'projects',
       hasMany: true,
     },
     {
-      name: "showcasedProjects",
-      type: "relationship",
-      relationTo: "projects",
+      name: 'showcasedProjects',
+      type: 'relationship',
+      relationTo: 'projects',
       hasMany: true,
       filterOptions: ({ data }) => {
         return {
           id: {
-            in: data?.relatedProjects || []
-          }
+            in: data?.relatedProjects || [],
+          },
         }
       },
     },
     {
-      name: "projectCount",
-      type: "number",
+      name: 'projectCount',
+      type: 'number',
       defaultValue: 0,
       admin: {
         readOnly: true,

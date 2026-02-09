@@ -11,13 +11,13 @@ export const metadata = {
 export default async function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props
 
-  const fontVariables = allFonts.map(font => font.variable).join(' ');
+  const fontVariables = allFonts.map((font) => font.variable).join(' ')
 
   return (
     <html lang="en" className={fontVariables}>
       <body>
-          <MainLayout>{children}</MainLayout>
+        <MainLayout>{children}</MainLayout>
       </body>
     </html>
-  );
+  )
 }

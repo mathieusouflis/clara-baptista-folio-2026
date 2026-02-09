@@ -1,12 +1,12 @@
-import { NavPathLink } from "./nav-path-link";
+import { NavPathLink } from './nav-path-link'
 
 export function NavLayout({ children }: { children: React.ReactNode }) {
   const pages = [
-    { label: "Home", href: "/" },
-    { label: "Projects", href: "/categories" },
-    { label: "About", href: "/about" },
-    { label: "Contact", href: "mailto:contact@clarabaptista.com" },
-  ];
+    { label: 'Home', href: '/' },
+    { label: 'Projects', href: '/categories' },
+    { label: 'About', href: '/about' },
+    { label: 'Contact', href: 'mailto:contact@clarabaptista.com' },
+  ]
 
   return (
     <>
@@ -23,5 +23,5 @@ export function NavLayout({ children }: { children: React.ReactNode }) {
       </nav>
       {children}
     </>
-  );
+  )
 }
