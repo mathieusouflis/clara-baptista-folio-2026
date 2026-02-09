@@ -4,24 +4,13 @@ import config from '@/payload.config'
 import Image from 'next/image'
 import { getPayload } from 'payload'
 import Link from 'next/link'
+import { Category } from '@/payload-types'
 
-export async function ProjectListPage({ id }: { id: number }) {
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
-  const categorie = await payload.findByID({
-    collection: 'categories',
-    id,
-    populate: {
-      projects: {
-        image: true,
-        name: true,
-        releaseDate: true,
-      },
-    },
-  })
+export async function ProjectListPage({ category }: { category: Category }) {
+
 
   const projects =
-    categorie?.relatedProjects?.map(
+    category?.relatedProjects?.map(
       (project) =>
         typeof project !== 'number' && {
           ...project,
@@ -32,14 +21,14 @@ export async function ProjectListPage({ id }: { id: number }) {
   return (
     <Grid className="my-10">
       <GridItem span={'full'}>
-        <h1 className="text-white text-8xl">{categorie?.categoryName}</h1>
+        <h1 className="text-white text-8xl">{category?.categoryName}</h1>
       </GridItem>
       {projects.map(
         (project, idx) =>
           project &&
           project.imageUrl && (
             <ProjectPreview
-              categoryId={id}
+              categoryId={category.id}
               imageUrl={project.imageUrl}
               projectId={idx + 1}
               key={idx}

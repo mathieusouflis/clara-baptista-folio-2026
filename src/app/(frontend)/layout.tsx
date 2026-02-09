@@ -4,8 +4,7 @@ import { MainLayout } from '@/components/layout/main'
 import { allFonts } from '@/lib/fonts'
 
 export const metadata = {
-  description: 'A blank template using Payload in a Next.js app.',
-  title: 'Payload Blank Template',
+  title: 'Clara Baptista portfolio',
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {

@@ -1,9 +1,10 @@
 import { Grid, GridItem } from '@/components/layout/grid'
-import config from '@/payload.config'
+import { Project } from '@/payload-types'
+
 import { Play, SkipBack, SkipForward } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { getPayload } from 'payload'
+import { PaginatedDocs } from 'payload'
 
 const months = [
   'January',
@@ -21,25 +22,13 @@ const months = [
 ]
 
 export async function ProjectPage({
+  projects,
   categoryId,
-  projectId,
 }: {
+  projects: PaginatedDocs<Project>,
   categoryId: number
-  projectId: number
 }) {
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
-  const projects = await payload.find({
-    collection: 'projects',
-    where: {
-      relatedCategories: {
-        contains: categoryId,
-      },
-    },
-    sort: 'releaseDate',
-    limit: 1,
-    page: projectId,
-  })
+
 
   if (!projects.docs || projects.docs.length === 0) {
     return null
