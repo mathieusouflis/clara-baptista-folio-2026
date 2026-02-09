@@ -91,6 +91,31 @@ export const Categories: CollectionConfig = {
             console.error(`Error adding category to project ${projectId}:`, error)
           }
         }
+
+        // Sort relatedProjects by releaseDate
+        if (doc.relatedProjects && Array.isArray(doc.relatedProjects)) {
+          const projectsWithDetails = await Promise.all(
+            doc.relatedProjects.map(async (projectId: any) => {
+              const project = await req.payload.findByID({
+                collection: 'projects',
+                id: typeof projectId === 'object' ? projectId.id : projectId,
+                req,
+              })
+              return project ? { ...project, id: projectId } : null
+            })
+          )
+
+          const sortedProjects = projectsWithDetails
+            .filter((project) => project !== null)
+            .sort((a: any, b: any) => {
+              const dateA = a.releaseDate ? new Date(a.releaseDate).getTime() : Infinity
+              const dateB = b.releaseDate ? new Date(b.releaseDate).getTime() : Infinity
+              return dateA - dateB
+            })
+            .map((project) => project.id)
+
+          doc.relatedProjects = sortedProjects
+        }
       },
     ],
   },

@@ -17,7 +17,7 @@ export async function ProjectListPage({ id }: { id: number }) {
         name: true,
         releaseDate: true
       }
-    }
+    },
   })
 
   const projects = categorie?.relatedProjects?.map((project) =>
@@ -32,16 +32,16 @@ export async function ProjectListPage({ id }: { id: number }) {
       <h1 className='text-white text-8xl'>{categorie?.categoryName}</h1>
     </GridItem>
     {projects.map((project, idx) => (
-      project && project.imageUrl && <ProjectPreview imageUrl={project.imageUrl} projectId={project.id} key={idx} />
+      project && project.imageUrl && <ProjectPreview categoryId={id} imageUrl={project.imageUrl} projectId={idx+1} key={idx} />
     ))}
   </Grid>
 }
 
 
-function ProjectPreview({ imageUrl, projectId }: { imageUrl: string, projectId: number }) {
+function ProjectPreview({ categoryId, imageUrl, projectId }: { categoryId: number, imageUrl: string, projectId: number }) {
   return (
     <GridItem span={2} className='flex items-end'>
-      <Link href={`/projects/${projectId}`} className='relative group'>
+      <Link href={`/categories/${categoryId}/${projectId}`} className='relative group'>
         <Play className='group-hover:opacity-100 stroke-white w-8 opacity-0 duration-300 absolute top-1/2 left-1/2 -translate-1/2 z-10'/>
         <Image src={imageUrl} alt={"Category Image (not an alt)"} width={1940} height={1080} className="w-full h-auto group-hover:opacity-50 transition-opacity duration-300" />
       </Link>
