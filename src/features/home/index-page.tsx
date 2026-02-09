@@ -31,7 +31,7 @@ export function HomePage({ projectsList }: { projectsList: Project[] }) {
           <p className="absolute -bottom-5 right-0 text-white text-xl uppercase ">Clara Baptista</p>
           <Link
             href={'/categories'}
-            className="absolute -bottom-52 left-1/2 -translate-x-1/2 text-white px-16 py-4 text-[14px] border border-white hover:bg-white hover:text-black hover:border-white duration-300"
+            className="absolute -bottom-52 left-1/2 -translate-x-1/2 text-white px-16 py-4 text-[14px] border border-white hover:bg-white hover:text-black hover:border-white duration-300 font-semibold"
           >
             ENTER
           </Link>
