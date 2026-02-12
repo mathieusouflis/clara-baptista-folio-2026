@@ -25,11 +25,9 @@ export async function ProjectPage({
   projects,
   categoryId,
 }: {
-  projects: PaginatedDocs<Project>,
+  projects: PaginatedDocs<Project>
   categoryId: number
 }) {
-
-
   if (!projects.docs || projects.docs.length === 0) {
     return null
   }

@@ -3,7 +3,7 @@ import { getPayload } from 'payload'
 import config from '@/payload.config'
 
 export const metadata = {
-  title: "Clara Baptista Portfolio - Category"
+  title: 'Clara Baptista Portfolio - Category',
 }
 
 export default async function Page({ params }: { params: Promise<{ categoryId: string }> }) {

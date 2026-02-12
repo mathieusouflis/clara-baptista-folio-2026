@@ -1,9 +1,9 @@
 import { ProjectPage } from '@/features/project'
-import { getPayload } from 'payload';
+import { getPayload } from 'payload'
 import config from '@/payload.config'
 
 export const metadata = {
-  title: "Clara Baptista Portfolio - Project"
+  title: 'Clara Baptista Portfolio - Project',
 }
 
 export default async function Page({
@@ -31,5 +31,5 @@ export default async function Page({
 
   metadata.title = `Clara Baptista Portfolio - ${project.name}`
 
-  return <ProjectPage projects={projects} categoryId={parseInt(categoryId)}/>
+  return <ProjectPage projects={projects} categoryId={parseInt(categoryId)} />
 }
