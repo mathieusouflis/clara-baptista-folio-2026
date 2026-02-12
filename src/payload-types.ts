@@ -172,6 +172,14 @@ export interface Project {
   description?: string | null;
   releaseDate?: string | null;
   image?: (number | null) | Media;
+  content?:
+    | {
+        title: string;
+        contentDescription: string;
+        images?: (number | Media)[] | null;
+        id?: string | null;
+      }[]
+    | null;
   relatedCategories?: (number | Category)[] | null;
   updatedAt: string;
   createdAt: string;
@@ -321,6 +329,14 @@ export interface ProjectsSelect<T extends boolean = true> {
   description?: T;
   releaseDate?: T;
   image?: T;
+  content?:
+    | T
+    | {
+        title?: T;
+        contentDescription?: T;
+        images?: T;
+        id?: T;
+      };
   relatedCategories?: T;
   updatedAt?: T;
   createdAt?: T;

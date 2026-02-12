@@ -69,19 +69,53 @@ export const Projects: CollectionConfig = {
       name: 'name',
       type: 'text',
       required: true,
+      admin: {
+        position: "sidebar"
+      }
     },
     {
       name: 'description',
       type: 'textarea',
+      admin: {
+        position: "sidebar"
+      }
     },
     {
       name: 'releaseDate',
       type: 'date',
+      admin: {
+        position: "sidebar"
+      }
     },
     {
       name: 'image',
       type: 'upload',
       relationTo: 'media',
+      admin: {
+        position: "sidebar"
+      }
+    },
+    {
+      name: "content",
+      type: "array",
+      fields: [
+        {
+          name: "title",
+          type: "text",
+          required: true
+        },
+        {
+          name: "contentDescription",
+          type: "textarea",
+          required: true,
+        },
+        {
+          name: "images",
+          type: "upload",
+          relationTo: "media",
+          hasMany: true
+        }
+      ]
     },
     {
       name: 'relatedCategories',
@@ -90,6 +124,7 @@ export const Projects: CollectionConfig = {
       hasMany: true,
       admin: {
         readOnly: true,
+        position: "sidebar"
       },
     },
   ],
