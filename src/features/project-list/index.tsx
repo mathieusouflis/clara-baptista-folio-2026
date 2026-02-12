@@ -36,18 +36,24 @@ export async function ProjectListPage({ category }: { category: Category }) {
       <GridItem span={'full'}>
         <h1 className="text-white text-8xl">{category?.categoryName}</h1>
       </GridItem>
-      {projects.map(
-        (project, idx) =>
-          project &&
-          project.imageUrl && (
-            <ProjectPreview
-              categoryId={category.id}
-              imageUrl={project.imageUrl}
-              projectId={idx + 1}
-              key={idx}
-            />
-          ),
-      )}
+      {Array.from({ length: 6 }).map((_, columnIdx) => (
+        <GridItem key={`column-${columnIdx}`} span={2} className="flex flex-col gap-(--grid-gap)">
+          {projects
+            .map((project, idx) => ({ project, idx }))
+            .filter(({ idx }) => idx % 6 === columnIdx)
+            .map(({ project, idx }) =>
+              project &&
+              project.imageUrl ? (
+                <ProjectPreview
+                  categoryId={category.id}
+                  imageUrl={project.imageUrl}
+                  projectId={idx + 1}
+                  key={idx}
+                />
+              ) : null,
+            )}
+        </GridItem>
+      ))}
     </Grid>
   )
 }
