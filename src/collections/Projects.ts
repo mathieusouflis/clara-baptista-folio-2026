@@ -70,52 +70,52 @@ export const Projects: CollectionConfig = {
       type: 'text',
       required: true,
       admin: {
-        position: "sidebar"
-      }
+        position: 'sidebar',
+      },
     },
     {
       name: 'description',
       type: 'textarea',
       admin: {
-        position: "sidebar"
-      }
+        position: 'sidebar',
+      },
     },
     {
       name: 'releaseDate',
       type: 'date',
       admin: {
-        position: "sidebar"
-      }
+        position: 'sidebar',
+      },
     },
     {
       name: 'image',
       type: 'upload',
       relationTo: 'media',
       admin: {
-        position: "sidebar"
-      }
+        position: 'sidebar',
+      },
     },
     {
-      name: "content",
-      type: "array",
+      name: 'content',
+      type: 'array',
       fields: [
         {
-          name: "title",
-          type: "text",
-          required: true
-        },
-        {
-          name: "contentDescription",
-          type: "textarea",
+          name: 'title',
+          type: 'text',
           required: true,
         },
         {
-          name: "images",
-          type: "upload",
-          relationTo: "media",
-          hasMany: true
-        }
-      ]
+          name: 'contentDescription',
+          type: 'textarea',
+          required: true,
+        },
+        {
+          name: 'images',
+          type: 'upload',
+          relationTo: 'media',
+          hasMany: true,
+        },
+      ],
     },
     {
       name: 'relatedCategories',
@@ -124,7 +124,7 @@ export const Projects: CollectionConfig = {
       hasMany: true,
       admin: {
         readOnly: true,
-        position: "sidebar"
+        position: 'sidebar',
       },
     },
   ],

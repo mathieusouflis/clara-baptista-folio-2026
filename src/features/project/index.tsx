@@ -1,10 +1,11 @@
 import { Grid, GridItem } from '@/components/layout/grid'
 import { Project } from '@/payload-types'
 
-import { Play, SkipBack, SkipForward } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { PaginatedDocs } from 'payload'
+import { useState } from 'react'
+import { ProjectSection } from './section'
 
 const months = [
   'January',
@@ -31,53 +32,60 @@ export async function ProjectPage({
   if (!projects.docs || projects.docs.length === 0) {
     return null
   }
-  console.log(projects)
   const project = projects.docs[0]
-
   return (
-    <Grid>
-      <GridItem start={4} className="flex h-screen items-center"></GridItem>
-      <GridItem
-        start={5}
-        end={9}
-        className="flex flex-col justify-center items-center h-screen py-(--grid-margin) gap-7"
-      >
-        <span className="relative h-1/2 max-h-1/2 flex items-center justify-center">
-          <Link
-            href={`/categories/${categoryId}/${projects.hasPrevPage ? projects.prevPage : projects.totalPages}`}
-          >
-            <SkipBack className="absolute top-1/2 -left-(--grid-gap) -translate-y-1/2 -translate-x-full fill-white stroke-white size-12 cursor-pointer" />
-          </Link>
-          {project.image && typeof project.image === 'object' && project.image.url ? (
-            <Image
-              src={project.image.url}
-              alt={project.image.alt || 'Project image'}
-              width={1920}
-              height={1080}
-              className="h-full object-contain"
-            />
-          ) : (
-            <span className="w-full h-auto aspect-square bg-slate-500" />
-          )}
-          <Link href={`/categories/${categoryId}/${projects.hasNextPage ? projects.nextPage : 1}`}>
-            <SkipForward className="absolute top-1/2 -right-(--grid-gap) -translate-y-1/2 translate-x-full fill-white stroke-white size-12 cursor-pointer" />
-          </Link>
-        </span>
-        <div className="w-full px-9 py-2.5 rounded-full flex flex-row items-center gap-6 bg-[#070092] min-h-28">
-          <Play className="fill-white stroke-white size-12" />
-          <div className="flex flex-col w-full text-white">
-            <h1 className="text-2xl font-semibold">{project.name}</h1>
-            <p className="opacity-60 font-medium text-[16px]">{project.description}</p>
-            {project.releaseDate && (
-              <p className="opacity-60 text-[14px]">
-                {months[new Date(project.releaseDate).getMonth()]}{' '}
-                {new Date(project.releaseDate).getFullYear()}
-              </p>
-            )}
+    <>
+      <Grid as="section" withMargins={false} withGap={false}>
+        <GridItem
+          span={"full"}
+          className="p-[calc(2*var(--grid-margin))] flex flex-col justify-between bg-white h-screen md:col-span-6!"
+        >
+          <div className="flex flex-col justify-between h-full w-full">
+            <h1 className="opacity-80 text-blue-700 font-bold text-8xl">{project.name}</h1>
+            <div
+              className="flex items-center justify-center p-[calc(2*var(--grid-margin))] md:hidden"
+            >
+              {project.image && typeof project.image === 'object' && (
+                <Image
+                  src={project.image.url ?? ''}
+                  alt={project.image.alt}
+                  width={project.image.width || 1920}
+                  height={project.image.height || 1080}
+                  className="w-4/5"
+                />
+              )}
+            </div>
+            <div>
+            {project.content?.map((content, idx) => (
+              <Link
+                href={`#${content.id}`}
+                key={idx}
+                className="flex flex-row justify-between border-b-2 p-3 border-blue-700 text-blue-700 font-bold"
+              >
+                <span>{content.title.toLocaleLowerCase()}</span>
+                <span>{idx + 1 > 10 ? idx + 1 : `0${idx + 1}`}</span>
+              </Link>
+            ))}
+            </div>
           </div>
-        </div>
-      </GridItem>
-      <GridItem start={10} className="flex h-screen items-center"></GridItem>
-    </Grid>
+        </GridItem>
+        <GridItem
+          span={6}
+          className="items-center justify-center p-[calc(2*var(--grid-margin))] hidden md:flex"
+        >
+          {project.image && typeof project.image === 'object' && (
+            <Image
+              src={project.image.url ?? ''}
+              alt={project.image.alt}
+              width={project.image.width || 1920}
+              height={project.image.height || 1080}
+              className="w-4/5"
+            />
+          )}
+        </GridItem>
+      </Grid>
+      {project.content?.map((content) => <ProjectSection key={content.id} content={[content]} />
+      )}
+    </>
   )
 }

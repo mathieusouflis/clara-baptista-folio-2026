@@ -18,9 +18,15 @@ export async function ProjectListPage({ category }: { category: Category }) {
 
   if (projects.length === 0)
     return (
-      <Grid className='h-screen'>
-        <GridItem start={2} end={11} className='py-10 h-screen flex flex-col gap-10 items-center justify-center'>
-          <h1 className="opacity-60 text-white text-5xl md:text-6xl lg:text-8xl font-bold text-center">WIP, stay tuned !</h1>
+      <Grid className="h-screen">
+        <GridItem
+          start={2}
+          end={11}
+          className="py-10 h-screen flex flex-col gap-10 items-center justify-center"
+        >
+          <h1 className="opacity-60 text-white text-5xl md:text-6xl lg:text-8xl font-bold text-center">
+            WIP, stay tuned !
+          </h1>
           <Link
             href={'/categories'}
             className="text-white px-16 py-4 text-[14px] border border-white hover:bg-white hover:text-black hover:border-white duration-300 font-semibold"
@@ -42,8 +48,7 @@ export async function ProjectListPage({ category }: { category: Category }) {
             .map((project, idx) => ({ project, idx }))
             .filter(({ idx }) => idx % 6 === columnIdx)
             .map(({ project, idx }) =>
-              project &&
-              project.imageUrl ? (
+              project && project.imageUrl ? (
                 <ProjectPreview
                   categoryId={category.id}
                   imageUrl={project.imageUrl}

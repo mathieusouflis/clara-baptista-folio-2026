@@ -9,7 +9,14 @@
   .font-aston-script {
     font-family: var(--font-aston-script);
   }
+
+  .no-scrollbar {
+    @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
+  }
+
 }
+
+
 
 body {
   background-color: #0000ff;
