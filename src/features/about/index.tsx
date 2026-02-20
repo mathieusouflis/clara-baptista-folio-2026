@@ -68,12 +68,12 @@ export async function AboutPage() {
                         </p>
                       </GridItem>
                       <GridItem span={4} className="md:col-span-2!">
-                        <p className="text-white text-[16px] font-normal w-full text-center">
+                        <p className="text-white text-[16px] font-normal w-full">
                           {experience.jobPost}
                         </p>
                       </GridItem>
                       <GridItem span={2} className="md:col-span-1!">
-                        <p className="text-white text-[16px] font-normal w-full text-center">
+                        <p className="text-white text-[16px] font-normal w-full">
                           {experience.jobType}
                         </p>
                       </GridItem>
