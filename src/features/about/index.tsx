@@ -154,7 +154,7 @@ export async function AboutPage() {
                 {softSkills.map((skill, idx) => {
                   return (
                     <Grid columns={10} withMargins={false} key={`soft-${idx}`}>
-                      <GridItem span={2} className="md:col-span-1!">
+                      <GridItem span={2}>
                         <p className="text-white text-[16px] font-normal w-full">{skill.name}</p>
                       </GridItem>
                       <GridItem start={3} end={10} className="md:col-start-2!">
