@@ -24,7 +24,7 @@ export async function AboutPage() {
           className="h-full flex flex-col justify-center md:col-start-2! md:col-end-6!"
         >
           <Image
-            className="flex h-auto aspect-5/6 bg-red-600 w-full object-cover"
+            className="flex h-auto aspect-5/6 w-full object-cover"
             src={typeof aboutGlobal.image !== 'number' ? (aboutGlobal.image.url ?? '') : ''}
             alt={typeof aboutGlobal.image !== 'number' ? aboutGlobal.image.alt : ''}
             width={1920}
