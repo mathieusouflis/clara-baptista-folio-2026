@@ -1,3 +1,4 @@
+import { revalidatePath } from 'next/cache'
 import type { CollectionConfig } from 'payload'
 
 export const Projects: CollectionConfig = {
@@ -62,6 +63,10 @@ export const Projects: CollectionConfig = {
         }
       },
     ],
+    afterChange: [async ({ doc }) => {
+      revalidatePath("/categories")
+      return doc
+    }]
   },
 
   fields: [
