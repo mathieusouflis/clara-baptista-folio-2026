@@ -91,8 +91,12 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    about: About;
+  };
+  globalsSelect: {
+    about: AboutSelect<false> | AboutSelect<true>;
+  };
   locale: null;
   user: User;
   jobs: {
@@ -393,6 +397,120 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about".
+ */
+export interface About {
+  id: number;
+  image: number | Media;
+  name: string;
+  description?: string | null;
+  experiences?:
+    | {
+        enterpriseName: string;
+        jobPost: string;
+        jobType: string;
+        startYear: number;
+        endYear?: number | null;
+        id?: string | null;
+      }[]
+    | null;
+  education?:
+    | {
+        schoolName: string;
+        schoolType: string;
+        startYear: number;
+        endYear?: number | null;
+        id?: string | null;
+      }[]
+    | null;
+  hardSkillsCategories?:
+    | {
+        categoryName: string;
+        hardSkills?:
+          | {
+              name: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  softSkills?:
+    | {
+        name: string;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  languages?:
+    | {
+        name: string;
+        level: 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2';
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about_select".
+ */
+export interface AboutSelect<T extends boolean = true> {
+  image?: T;
+  name?: T;
+  description?: T;
+  experiences?:
+    | T
+    | {
+        enterpriseName?: T;
+        jobPost?: T;
+        jobType?: T;
+        startYear?: T;
+        endYear?: T;
+        id?: T;
+      };
+  education?:
+    | T
+    | {
+        schoolName?: T;
+        schoolType?: T;
+        startYear?: T;
+        endYear?: T;
+        id?: T;
+      };
+  hardSkillsCategories?:
+    | T
+    | {
+        categoryName?: T;
+        hardSkills?:
+          | T
+          | {
+              name?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  softSkills?:
+    | T
+    | {
+        name?: T;
+        description?: T;
+        id?: T;
+      };
+  languages?:
+    | T
+    | {
+        name?: T;
+        level?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
