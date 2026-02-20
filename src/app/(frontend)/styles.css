@@ -13,10 +13,7 @@
   .no-scrollbar {
     @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
   }
-
 }
-
-
 
 body {
   background-color: #0000ff;

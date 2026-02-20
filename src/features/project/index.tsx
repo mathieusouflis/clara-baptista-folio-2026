@@ -37,14 +37,12 @@ export async function ProjectPage({
     <>
       <Grid as="section" withMargins={false} withGap={false}>
         <GridItem
-          span={"full"}
+          span={'full'}
           className="p-[calc(2*var(--grid-margin))] flex flex-col justify-between bg-white h-screen md:col-span-6!"
         >
           <div className="flex flex-col justify-between h-full w-full">
             <h1 className="opacity-80 text-blue-700 font-bold text-8xl">{project.name}</h1>
-            <div
-              className="flex items-center justify-center p-[calc(2*var(--grid-margin))] md:hidden"
-            >
+            <div className="flex items-center justify-center p-[calc(2*var(--grid-margin))] md:hidden">
               {project.image && typeof project.image === 'object' && (
                 <Image
                   src={project.image.url ?? ''}
@@ -56,16 +54,16 @@ export async function ProjectPage({
               )}
             </div>
             <div>
-            {project.content?.map((content, idx) => (
-              <Link
-                href={`#${content.id}`}
-                key={idx}
-                className="flex flex-row justify-between border-b-2 p-3 border-blue-700 text-blue-700 font-bold"
-              >
-                <span>{content.title.toLocaleLowerCase()}</span>
-                <span>{idx + 1 > 10 ? idx + 1 : `0${idx + 1}`}</span>
-              </Link>
-            ))}
+              {project.content?.map((content, idx) => (
+                <Link
+                  href={`#${content.id}`}
+                  key={idx}
+                  className="flex flex-row justify-between border-b-2 p-3 border-blue-700 text-blue-700 font-bold"
+                >
+                  <span>{content.title.toLocaleLowerCase()}</span>
+                  <span>{idx + 1 > 10 ? idx + 1 : `0${idx + 1}`}</span>
+                </Link>
+              ))}
             </div>
           </div>
         </GridItem>
@@ -84,8 +82,9 @@ export async function ProjectPage({
           )}
         </GridItem>
       </Grid>
-      {project.content?.map((content) => <ProjectSection key={content.id} content={[content]} />
-      )}
+      {project.content?.map((content) => (
+        <ProjectSection key={content.id} content={[content]} />
+      ))}
     </>
   )
 }
