@@ -35,7 +35,7 @@ export async function AboutPage() {
           span={'full'}
           className="h-full flex flex-col gap-16 justify-start md:col-start-6! md:col-end-12! md:justify-center"
         >
-          <h1 className="font-aston-script text-5xl md:text-6xl lg:text-7xl text-white whitespace-nowrap md:text-center">
+          <h1 className="font-aston-script text-5xl md:text-6xl lg:text-7xl text-white whitespace-nowrap">
             {aboutGlobal.name}
           </h1>
           {aboutGlobal.description && (
